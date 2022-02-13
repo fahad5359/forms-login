@@ -10,6 +10,7 @@ $(document).ready(() => {
     // inputs
     let login = $("#login")
     let password = $("#password")
+    let form = $("#form")
 
     // buttuns
     let show_pass_btn = $("#show_password_btn")
@@ -18,21 +19,28 @@ $(document).ready(() => {
 
     // logic
 
-    login_btn.click(() => {
+    login_btn.click((e) => {
         // console.log("hla");
         for (let i = 0; i < employees.length; i++) {
             // console.log("employees[i]");
-            if (login.val() === employees[i].user) {
-                console.log("welcom");
+            if (login.val() === employees[i].user && password.val() === employees[i].password) {
+                card.css("background-color", "green")
                 return;
             }
-            else if(login.val()!==employees[i].user){
-                console.log("wrong");
+            else if (login.val() !== employees[i].user) {
+                card.css("background-color", "red")
             }
-
         }
-
-
-
+        e.preventDefault()
     });
+    show_pass_btn.click(() => {
+        // password.attr("type","text")
+        // we get the attribute "type" from the password input,  we compere it then buldd the logic upon it 
+        if (password.attr("type") ===  "password") {
+            password.attr("type", "text")
+        }else{
+            password.attr("type", "password")
+        }
+    })
+
 });
